@@ -119,8 +119,8 @@ namespace Ashwell_Maintenance
 
             gfx.DrawString(dic["nameAndSiteAdress"], font, XBrushes.Black, new XRect(136, 127, 280, 4), XStringFormats.Center);//name and site adress
             gfx.DrawString(dic["client"], font, XBrushes.Black, new XRect(445, 127, 115, 4), XStringFormats.Center);//client
-            gfx.DrawString(dic["meterLocation"], font, XBrushes.Black, new XRect(99, 171, 270, 4), XStringFormats.Center);//meter location
-            gfx.DrawString(dic["commentsOnOverallMeter"], font, XBrushes.Black, new XRect(183, 188, 374, 4), XStringFormats.Center);//coments on overall mater condition
+            gfx.DrawString(dic["meterLocation"], font, XBrushes.Black, new XRect(99, 171, 270, 4), XStringFormats.CenterLeft);//meter location
+            gfx.DrawString(dic["commentsOnOverallMeter"], font, XBrushes.Black, new XRect(183, 188, 374, 4), XStringFormats.CenterLeft);//coments on overall mater condition
 
             if (dic["checkInternalMeter"] == "True")
             {
@@ -132,8 +132,8 @@ namespace Ashwell_Maintenance
             }
 
 
-            gfx.DrawString(dic["pipeworkLocation"], font, XBrushes.Black, new XRect(111, 335, 444, 4), XStringFormats.Center);//pipeline
-            gfx.DrawString(dic["commentsOnOverallPipework"], font, XBrushes.Black, new XRect(195, 351, 360, 4), XStringFormats.Center);//overall pipeline
+            gfx.DrawString(dic["pipeworkLocation"], font, XBrushes.Black, new XRect(111, 335, 444, 4), XStringFormats.CenterLeft);//pipeline
+            gfx.DrawString(dic["commentsOnOverallPipework"], font, XBrushes.Black, new XRect(195, 351, 360, 4), XStringFormats.CenterLeft);//overall pipeline
             gfx.DrawString(dic["reasonForWarningNotice"], font, XBrushes.Black, new XRect(370, 614, 185, 4), XStringFormats.Center);//warning noter
             gfx.DrawString(dic["warningNoticeRefNo"], font, XBrushes.Black, new XRect(357, 629, 197, 4), XStringFormats.Center);//warnig noter reff number
             gfx.DrawString(dic["dateOfLastTightnessTest"], font, XBrushes.Black, new XRect(370, 644, 185, 4), XStringFormats.Center);//date last tightness
@@ -789,16 +789,17 @@ namespace Ashwell_Maintenance
             XImage image = await ConvertToXImage(@"check_page.jpg");
             gfx.DrawImage(image, 0, 0, 595, 842);
 
+            gfx.DrawString(dic["uern"], font, XBrushes.Black, new XRect(395, 68, 46, 16.5), XStringFormats.Center);//uern
             gfx.DrawString(dic["WarningNoticeRefNo"], font, XBrushes.Black, new XRect(467, 50, 90, 21.5), XStringFormats.Center);//warning notice no
             gfx.DrawString(dic["SheetNo"], font, XBrushes.Black, new XRect(510, 29, 46, 16.5), XStringFormats.Center);//sheet number
             if (dic["checkRemedialToWorkRequiredYes"]=="True")
-            gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(490.5, 77, 15, 15));//remidial work
+            gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(490.5, 77, 15, 15));//remidial work
             else
-            gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(519.5, 77, 15, 15));//remidial work
+            gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(519.5, 77, 15, 15));//remidial work
             if (dic["checkTestsCompletedSatisfactoryYes"]=="True")
-            gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(490.5, 100, 15, 15));//test complited
+            gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(490.5, 100, 15, 15));//test complited
             else
-            gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(519.5, 100, 15, 15));//test complited
+            gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(519.5, 100, 15, 15));//test complited
             double y = 329.5;
             List<string> prviFor = new List<string>()
             {
@@ -921,15 +922,15 @@ namespace Ashwell_Maintenance
             string text = dic["nameAndAddressOfPremises"];
             XTextFormatter tf = new XTextFormatter(gfx);
             XRect layoutRectangle = boundingBox;
-            tf.DrawString(text, new XFont("Arial", 8), XBrushes.Black, layoutRectangle, XStringFormats.TopLeft);
+            tf.DrawString(text, new XFont("Arial", 10), XBrushes.Black, layoutRectangle, XStringFormats.TopLeft);
             text = dic["location"];
             XRect boundingBox1 = new XRect(80, 255, 475, 26);
             XRect layoutRectangle1 = boundingBox1;
-            tf.DrawString(text, new XFont("Arial", 8), XBrushes.Black, layoutRectangle1, XStringFormats.TopLeft);
+            tf.DrawString(text, new XFont("Arial", 10), XBrushes.Black, layoutRectangle1, XStringFormats.TopLeft);
             text = dic["ventilationCalculations"];
             XRect boundingBox2 = new XRect(80, 629, 475, 26);
             XRect layoutRectangle2 = boundingBox2;
-            tf.DrawString(text, new XFont("Arial", 8), XBrushes.Black, layoutRectangle2, XStringFormats.TopLeft);
+            tf.DrawString(text, new XFont("Arial", 10), XBrushes.Black, layoutRectangle2, XStringFormats.TopLeft);
 
             x = 38;
             y = 750;
@@ -991,11 +992,32 @@ namespace Ashwell_Maintenance
             layoutRectangle3 = boundingBox3;
             text = dic["safetyInterlocksComments"];
             tf.DrawString(text, new XFont("Arial", 5), XBrushes.Black, layoutRectangle3, XStringFormats.TopLeft);
+
             //checkExistingHighLevelCM,checkExistingLowLevelCM,checkRequiredHighLevelCM,checkRequiredLowLevelCM
             gfx.DrawString(dic["existingHighLevel"], font, XBrushes.Black, new XRect(112, 188, 90, 13), XStringFormats.Center);
             gfx.DrawString(dic["requiredHighLevel"], font, XBrushes.Black, new XRect(112, 207, 90, 13), XStringFormats.Center);
             gfx.DrawString(dic["existingLowLevel"], font, XBrushes.Black, new XRect(367, 188, 90, 13), XStringFormats.Center);
             gfx.DrawString(dic["requiredLowLevel"], font, XBrushes.Black, new XRect(367, 207, 90, 13), XStringFormats.Center);
+
+
+            if (dic["checkExistingHighLevelCM"] == "True")
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(203, 189.5, 15, 15));//remidial work
+            else
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(261, 189.5, 15, 17));//remidial work
+            if (dic["checkRequiredHighLevelCM"] == "True")
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(203, 207, 15, 15));//test complited
+            else
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(261, 207, 15, 17));//test complited
+
+
+            if (dic["checkExistingLowLevelCM"] == "True")
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(474, 189.5, 15, 15));//remidial work
+            else
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(474+58, 189.5, 15, 17));//remidial work
+            if (dic["checkRequiredLowLevelCM"] == "True")
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(474, 207, 15, 15));//test complited
+            else
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(474+58, 207, 15, 17));//test complited
 
             //string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
             //string filePath = System.IO.Path.Combine(downloadsFolder, "ConformityCheckReport.pdf");
@@ -1029,20 +1051,21 @@ namespace Ashwell_Maintenance
            
             if (dic["checkRemedialToWorkRequiredYes"] == "True")
             {
-                gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(488.5, 82, 15, 15));
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(488.5, 82, 15, 15));
             }
             else
             {
-                gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(518.7, 82, 15, 15));
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(518.7, 82, 15, 15));
             }
             if (dic["checkTestsCompletedSatisfactoryYes"] == "True")
             {
-                gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(488.5, 114.5, 15, 15));
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(488.5, 114.5, 15, 15));
             }
             else
             {
-                gfx.DrawEllipse(new XPen(XColor.FromArgb(30, 50, 200)), new XRect(518.7, 114.5, 15, 15));
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(518.7, 114.5, 15, 15));
             }
+            gfx.DrawString(dic["uern"], new XFont("Arial", 11), XBrushes.Black, new XRect(380, 27, 78, 26), XStringFormats.Center);
             gfx.DrawString(dic["SheetNo"], new XFont("Arial", 11), XBrushes.Black, new XRect(506, 27, 64, 26), XStringFormats.Center);
             gfx.DrawString(dic["nameOfPremises"], new XFont("Arial", 8), XBrushes.Black, new XPoint(100, 81.8));
             gfx.DrawString(dic["adressOfPremises"], new XFont("Arial", 8), XBrushes.Black, new XPoint(107, 113.8));
@@ -1124,15 +1147,26 @@ namespace Ashwell_Maintenance
             gfx.DrawString(dic["freeAirExistingLowLevel"], new XFont("Arial", 8), XBrushes.Black, new XRect(464, 393, 100, 17), XStringFormats.Center);
             gfx.DrawString(dic["freeAirRequiredHighLevel"], new XFont("Arial", 8), XBrushes.Black, new XRect(298, 410, 100, 17), XStringFormats.Center);
             gfx.DrawString(dic["freeAirRequiredLowLevel"], new XFont("Arial", 8), XBrushes.Black, new XRect(464, 410, 100, 17), XStringFormats.Center);
-           // ovo da se ispravi
-            gfx.DrawRectangle(XBrushes.White, new XRect(133, 394, 92, 15));
-            gfx.DrawString("1000  cm2   or", new XFont("Arial", 8), XBrushes.Black, new XPoint(134.7, 403));
-            gfx.DrawString(" 1000  m3/h", new XFont("Arial", 8), XBrushes.Black, new XPoint(185, 403));
-          
-            gfx.DrawRectangle(XBrushes.White, new XRect(133, 413, 92, 15));
-            gfx.DrawString("1000  cm2   or", new XFont("Arial", 8), XBrushes.Black, new XPoint(134.7, 422));
-            gfx.DrawString(" 1000  m3/h", new XFont("Arial", 8), XBrushes.Black, new XPoint(185, 422));
-           
+            // ovo da se ispravi
+
+            if (dic["checkFreeAirExistingCM"] == "True")
+            {
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(145, 395, 15, 15));
+            }
+            if(dic["checkFreeAirExistingMH"] == "True")
+            {
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(193, 395, 15, 15));
+            }
+
+            if (dic["checkFreeAirRequiredCM"] == "True")
+            {
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(145, 413, 15, 15));
+            }
+            if (dic["checkFreeAirRequiredMH"] == "True")
+            {
+                gfx.DrawEllipse(new XPen(XColor.FromArgb(0, 0, 0)), new XRect(193, 413, 15, 15));
+            }
+
             gfx.DrawString(dic["inletWorkingPressureTestFullLoad"], new XFont("Arial", 8), XBrushes.Black, new XRect(194, 614, 102, 17), XStringFormats.Center);
             gfx.DrawString(dic["standingPressure"], new XFont("Arial", 8), XBrushes.Black, new XRect(194, 632, 102, 17), XStringFormats.Center);
             gfx.DrawString(dic["inletWorkingPressureTestPartLoad"], new XFont("Arial", 8), XBrushes.Black, new XRect(464, 614, 102, 17), XStringFormats.Center);
